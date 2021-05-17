@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  module-1:
+    container_name: module-1
+    build:
+      context: ./module-1
+
+  module-2:
+    container_name: module-2
+    build:
+      context: ./module-2
+
+  host-app:
+    container_name: host-app
+    build:
+      context: ./host-app
+
+  orchestrator:
+    container_name: orchestrator
+    ports:
+      - 80:80
+    depends_on:
+      - module-1
+      - module-2
+      - host-app
+    build:
+      context: .
